@@ -1,0 +1,6 @@
+sh int des -> will show interface description
+sh ip int br -> will show assigned IP for the interface
+sh run policy-map [name] --> will show policy map config
+sh run -> will show running configuration of the device
+sh version -> will show device details ...
+sh run int [infacernumber.vlanID]
