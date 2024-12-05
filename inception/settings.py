@@ -10,13 +10,13 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # Take environment variables from .env file
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 env = environ.Env()
 
 
+NTC_TEMPLATES_PATH = os.path.join('D:/code/inception/env/Lib/site-packages/ntc_templates/templates')
+# Set the NET_TEXTFSM environment variable
+os.environ['NET_TEXTFSM'] = NTC_TEMPLATES_PATH
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-zyy3mcj#hdfc150io6dlfv%v2sj(r6@1q0yq+f+5vs53m7(&nd'
@@ -25,8 +25,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -57,7 +55,7 @@ ROOT_URLCONF = 'inception.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR, NTC_TEMPLATES_PATH],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+
+    font-family: Helvetica;
+}
+
+body {
+    background-color: black;
+}
+
+.main-container {
+    display: flex;
+    justify-content: baseline;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    color: whitesmoke;
+    gap: 20px;
+}
+
+.main-container table{
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+}
+
+thead {
+    background-color: rgb(94, 114, 135);
+}
+
+th {
+    border: 1px solid darkblue;
+    text-align: center;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+td{
+    border: 1px solid rgb(38, 32, 75);
+    text-align: center;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+
+.action-container {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100vh;
+    /* border: solid 1px red; */
+}
+
+
+.action-container form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    /* flex-wrap: nowrap; */
+    height: 94vh;
+    /* border: 2px solid green; */
+    margin-top: 5%;
+    margin-bottom: 3%;
+    overflow: auto;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+}
+
+
+
+/* Set the width of the scrollbar */
+.action-container form::-webkit-scrollbar {
+    width: 6px;  /* For vertical scrollbar */
+    height: 6px; /* For horizontal scrollbar */
+}
+
+/* Style the scrollbar track (the background of the scrollbar) */
+.action-container form::-webkit-scrollbar-track {
+    background-color: #f1f1f1;  /* Light gray track */
+    border-radius: 10px;         /* Rounded corners */
+}
+
+/* Style the scrollbar thumb (the draggable part) */
+.action-container form::-webkit-scrollbar-thumb {
+    background-color: #888;  /* Gray color */
+    border-radius: 10px;
+}
+
+/* Style the scrollbar thumb on hover */
+.action-container form::-webkit-scrollbar-thumb:hover {
+    background-color: #555;  /* Darker gray when hovered */
+}
+
+
+
+
+
+
+
+
+
+.action-container form button {
+    width: 100%;
+    padding: 5px;
+    border: thin solid darkslateblue;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background-color: silver;
+}
+
+
+.action-container form button:hover {
+    cursor: pointer;
+    background-color: slategray;
+}
+
+
+
+.output-container { 
+    flex: 6;
+    height: 100vh;
+    overflow: auto;
+}
+
+
+
+.output-container table {
+    margin: 10px;
+}

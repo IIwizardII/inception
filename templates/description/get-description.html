@@ -7,35 +7,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Description</title>
+
+    <link rel="stylesheet" href="{% static 'styles/description.css' %}">
 </head>
 <body>
     
     <div class="main-container">
-        <div>
+
+        <div class="action-container">
             <form action="{% url 'get-description' %}" method="post">
                 {% csrf_token %}
-                <button name="get-data">Get Data</button>
+                <button name="interface_description">Interface description</button>
+                <button name="interface_brief">Interface brief</button>
+                <button name="all_interface">All interface</button>
+                <button name="device_version">Show version</button>
+                <button name="ip_interface">IP interface</button>
+                <button name="policy_map">Policy map</button>
+                <button name="running_configuration">All configuration</button>
+                <button name="ip_route">IP route</button>
+                <button name="process_cpu">Process CPU</button>
+
             </form>
         </div>
+
         
-        <div class="display-interface-description">
+        <div class="output-container">
             {% if data %}
-                <pre>{{ data }}</pre>
-                <!-- <table>
+                <table>
                     <thead>
                         <tr>
-                            <th></th>
+                            {% for key in data.0.keys %}
+                                <th>{{ key }}</th>
+                            {% endfor %}
                         </tr>
+                        
                     </thead>
 
                     <tbody>
                         {% for row in data %}
                             <tr>
-                                <td>{{ row }}</td>
+                                {% for key, value in row.items %}
+                                    <td>{{ value }}</td>
+                                {% endfor %}
                             </tr>
                         {% endfor %}
                     </tbody>
-                </table> -->
+                </table>
             
 
             {% else %}
@@ -44,5 +61,13 @@
         </div>
     </div>
 
+
+    <!-- highlighting selected button -->
+    <script>
+        let clicked_button_name = '{{ clicked_button_name }}';
+        const button = document.querySelector(`button[name="${clicked_button_name}"]`);
+        button.style.backgroundColor = 'slategray';
+        button.style.color = 'white';
+    </script>
 </body>
 </html>
