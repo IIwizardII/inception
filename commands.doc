@@ -4,3 +4,41 @@ sh run policy-map [name] --> will show policy map config
 sh run -> will show running configuration of the device
 sh version -> will show device details ...
 sh run int [infacernumber.vlanID]
+
+
+
+
+
+
+# Credentials
+DEVICE_TYPE=cisco_xr
+HOST_NAME=sandbox-iosxr-1.cisco.com
+USER_NAME=admin
+PASSWORD=C1sco12345
+
+
+
+# Commands
+SHOW_MEMORY_SUMMARY=show memory summary
+SHOW_INTERFACES=show interfaces
+SHOW_INTERFACE_DESCRIPTION=show interfaces description
+SHOW_INTERFACE_BRIEF=show interface brief
+SHOW_IP_INTERFACE=show ip interface brief
+SHOW_RUN_POLICY_MAP=show run policy-map
+SHOW_RUN_POLICY_MAP_NAME=show run | include ^policy-map
+# show all running configuration
+SHOW_RUN=show run
+SHOW_VERSION=show version
+SHOW_RUN_INTERFACE=show run interface
+SHOW_CURRENT_RUNNING_POLICYS=show run | i policy-map
+SHOW_IP_ROUTE=show ip route
+SHOW_PROCESS_CPU=show processes cpu
+
+
+
+
+.gitignore
+/migrations
+migrations/
+__pycache__/
+.env
