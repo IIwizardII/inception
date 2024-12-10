@@ -35,7 +35,7 @@ def show_description(request):
         try:
             # Define the device connection details
             device = {
-                'device_type':device_type, # Cisco router or switch
+                'device_type':device_type, # Cisco router or switch version
                 'host':hostname,       
                 'username':username, 
                 'password':password,
@@ -59,9 +59,14 @@ def show_description(request):
                 button_name = "ip_interface"
                 command = env(str('SHOW_IP_INTERFACE'))
                 
-            elif "policy_map" in request.POST:
-                button_name = "policy_map"
-                command = env(str('SHOW_RUN_POLICY_MAP'))
+            elif "policy_map_details" in request.POST:
+                button_name = "policy_map_details"
+                # command = env(str('SHOW_RUN_POLICY_MAP'))
+                command = "show run policy-map"
+
+            elif "policy_map_names" in request.POST:
+                button_name = "policy_map_names"
+                command = env(str('SHOW_RUN_POLICY_MAP_NAME'))
                 
             elif "running_configuration" in request.POST:
                 button_name = "running_configuration"
@@ -80,7 +85,7 @@ def show_description(request):
                 command = env(str('SHOW_PROCESS_CPU'))
             
             
-            command_output = net_connect.send_command(command, use_textfsm=True)
+            command_output = net_connect.send_command(command, use_genie==True)
 
             # print(command_output)
             
