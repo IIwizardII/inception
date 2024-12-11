@@ -8,15 +8,17 @@ from netmiko import ConnectHandler, NetmikoAuthenticationException, NetmikoTimeo
 from ntc_templates.parse import parse_output
 from django.http import HttpResponse
 import os
+import textfsm
+import textfsm.parser
 
 
 
 env = environ.Env()
 
-device_type = env('DEVICE_TYPE')
-hostname = env('HOST_NAME')
-username = env('USER_NAME')
-password = env('PASSWORD')
+device_type = env(str('DEVICE_TYPE'))
+hostname = env(str('HOST_NAME'))
+username = env(str('USER_NAME'))
+password = env(str('PASSWORD'))
 
 
 
@@ -40,7 +42,6 @@ def show_description(request):
                 'username':username, 
                 'password':password,
             }
-
             net_connect = ConnectHandler(**device)
             
             if "interface_description" in request.POST:
@@ -61,12 +62,7 @@ def show_description(request):
                 
             elif "policy_map_details" in request.POST:
                 button_name = "policy_map_details"
-                # command = env(str('SHOW_RUN_POLICY_MAP'))
-                command = "show run policy-map"
-
-            elif "policy_map_names" in request.POST:
-                button_name = "policy_map_names"
-                command = env(str('SHOW_RUN_POLICY_MAP_NAME'))
+                command = env(str('SHOW_RUN_POLICY_MAP'))
                 
             elif "running_configuration" in request.POST:
                 button_name = "running_configuration"
@@ -84,14 +80,38 @@ def show_description(request):
                 button_name = "process_cpu"
                 command = env(str('SHOW_PROCESS_CPU'))
             
+            elif "memory_summary" in request.POST:
+                button_name = "memory_summary"
+                command = env(str('SHOW_MEMORY_SUMMARY'))
             
-            command_output = net_connect.send_command(command, use_genie==True)
+            
+            
+            
+            # for testing
+            elif "test" in request.POST:
+                button_name = "test"
+                
+                # Send the show run policy-map command
+                output = net_connect.send_command('show memory summary')
+                print("raw", output)
+                
+                # Specify the template path if it's not in the default location
+                template_path = 'D:/projects/inception/env/Lib/site-packages/ntc_templates/templates/cisco_xr_show_memory_summary.textfsm'
+                with open(template_path, 'r') as template:
+                    fsm = textfsm.TextFSM(template)
+                # Parse the output using your custom template
+                parsed_output = fsm.ParseText(text=output)
 
-            # print(command_output)
-            
+                print("parsed", parsed_output)
+                command = ""
+
+
+            command_output = net_connect.send_command(command, use_textfsm=True)
             net_connect.disconnect()
+            
             context = {
                 "data":command_output,
+                "data_type":type(command_output),
                 "clicked_button_name":button_name
             }
 

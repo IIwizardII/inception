@@ -130,6 +130,7 @@ td{
     flex: 6;
     height: 100vh;
     overflow: auto;
+    /* border: solid 1px red; */
 }
 
 
