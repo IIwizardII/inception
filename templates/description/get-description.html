@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load custom_filters %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,45 +17,47 @@
         <div class="action-container">
             <form action="{% url 'get-description' %}" method="post">
                 {% csrf_token %}
+                <button name="memory_summary">Memory summary</button>
                 <button name="interface_description">Interface description</button>
                 <button name="interface_brief">Interface brief</button>
                 <button name="all_interface">All interface</button>
                 <button name="device_version">Show version</button>
                 <button name="ip_interface">IP interface</button>
-                <button name="policy_map_details">Policy map details</button>
-                <button name="policy_map_names">Policy map names</button>
+                <button name="policy_map_details">Policy maps</button>
                 <button name="running_configuration">All configuration</button>
                 <button name="ip_route">IP route</button>
                 <button name="process_cpu">Process CPU</button>
-
+                
             </form>
         </div>
 
         
         <div class="output-container">
-            <pre>{{ data }}</pre>
             {% if data %}
-                <table>
-                    <thead>
-                        <tr>
-                            {% for key in data.0.keys %}
-                                <th>{{ key }}</th>
-                            {% endfor %}
-                        </tr>
-                        
-                    </thead>
-
-                    <tbody>
-                        {% for row in data %}
+                {% if data_type|is_string %}
+                    <pre>{{ data }}</pre>
+                {% else %}
+                    <table id="data-table">
+                        <thead>
                             <tr>
-                                {% for key, value in row.items %}
-                                    <td>{{ value }}</td>
+                                {% for key in data.0.keys %}
+                                    <th>{{ key }}</th>
                                 {% endfor %}
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            
+                            
+                        </thead>
+
+                        <tbody>
+                            {% for row in data %}
+                                <tr>
+                                    {% for key, value in row.items %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
 
             {% else %}
                 <p style="padding: 30px;">No data available</p>
@@ -70,6 +72,13 @@
         const button = document.querySelector(`button[name="${clicked_button_name}"]`);
         button.style.backgroundColor = 'slategray';
         button.style.color = 'white';
+    </script>
+    
+    <!-- for avoiding resubmission -->
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
     </script>
 </body>
 </html>
