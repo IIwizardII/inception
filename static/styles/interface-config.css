@@ -1,0 +1,122 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+}
+
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+.main-container {
+    display: flex;
+    justify-content: baseline;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    color: whitesmoke;
+    gap: 20px;
+}
+
+.main-container table{
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 14px;
+}
+
+thead {
+    background-color: rgb(94, 114, 135);
+    position: sticky;
+    top: -1;
+}
+
+th {
+    border: 1px solid darkblue;
+    text-align: center;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+td{
+    border: 1px solid rgb(38, 32, 75);
+    text-align: center;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.menu-container {
+    height: 100vh;
+    flex: 1;
+    /* border: solid 1px blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    flex-wrap: nowrap;
+}
+
+.action-buttons {
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: column;
+    /* border: 2px solid purple; */
+    height: 94vh;
+    flex-wrap: nowrap;
+}
+
+.action-buttons button {
+    font-size: 22px;
+    background: transparent;
+    color: aliceblue;
+    border: none;
+}
+
+.action-buttons button:hover {
+    color: thistle;
+    cursor: pointer;
+}
+
+
+.modification-options {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+
+.modification-options button {
+    font-size: 12px;
+}
+
+
+
+
+
+.output-container { 
+    flex: 9;
+    height: 100vh;
+    /* border: solid 1px red; */
+    overflow: auto;
+    border-left: thin solid silver;
+}
+
+.output-string-format {
+    padding: 50px;
+}
+
+.output-container table {
+    margin: 10px;
+    color: whitesmoke;
+}

@@ -15,19 +15,36 @@
     <div class="main-container">
         
         <div class="action-container">
-            <form action="{% url 'get-description' %}" method="post">
+            <form action="{% url 'get-description' %}" method="post" id="form-container">
                 {% csrf_token %}
                 <button name="memory_summary">Memory summary</button>
+                <button name="directory">Directory</button>
+                <button name="show_arp">Show ARP</button>
+                <button name="show_bgp">Show BGP</button>
+                <button name="show_bgp_instance_summary">BGP interface summary</button>
+                <button name="show_bgp_neighbors">BGP neighbors</button>
+                <button name="show_configuration_commit_list">Configuration commit list</button>
+                <button name="show_ip_bgp_summary">IP BGP summary</button>
+                <button name="show_ipv4_interface">IPV4 interface</button>
+                <button name="show_ipv4_vrf_interface_brief">IPV4 VRF interface brief</button>
+                <button name="show_ipv6_neighbors">IPV6 neighbors</button>
+                <button name="show_isis_neighbors">ISIS neighbors</button>
+                <button name="show_vrf_detail">VRF details</button>
+                <button name="show_rsvp_neighbors">RSVP neighbors</button>
+                <button name="show_redundancy_summary">Redundancy summary</button>
+                <button name="show_ospf_neighbor">OSPF neighbors</button>
+                <button name="show_ospf_vrf_interface_brief">OSPF VRF interface brief</button>
+                <button name="show_ospf_vrf_neighbor">OSPF VRF neighbors</button>
                 <button name="interface_description">Interface description</button>
                 <button name="interface_brief">Interface brief</button>
                 <button name="all_interface">All interface</button>
                 <button name="device_version">Show version</button>
                 <button name="ip_interface">IP interface</button>
                 <button name="policy_map_details">Policy maps</button>
-                <button name="running_configuration">All configuration</button>
+                <button name="running_configuration">All configurations</button>
                 <button name="ip_route">IP route</button>
                 <button name="process_cpu">Process CPU</button>
-                
+                <button name="test">test</button>
             </form>
         </div>
 
@@ -35,7 +52,9 @@
         <div class="output-container">
             {% if data %}
                 {% if data_type|is_string %}
-                    <pre>{{ data }}</pre>
+                    <div class="output-string-format">
+                        <pre>{{ data }}</pre>
+                    </div>
                 {% else %}
                     <table id="data-table">
                         <thead>
@@ -44,14 +63,22 @@
                                     <th>{{ key }}</th>
                                 {% endfor %}
                             </tr>
-                            
                         </thead>
 
                         <tbody>
                             {% for row in data %}
                                 <tr>
                                     {% for key, value in row.items %}
-                                        <td>{{ value }}</td>
+                                        {% if key == 'interface' %}
+                                            <td>
+                                                <a href="{% url 'interface-config' value %}" 
+                                                    style="text-decoration: none;">
+                                                    {{ value }}
+                                                </a>
+                                            </td>
+                                        {% else %}
+                                            <td>{{ value }}</td>
+                                        {% endif %}
                                     {% endfor %}
                                 </tr>
                             {% endfor %}
@@ -80,5 +107,21 @@
             window.history.replaceState( null, null, window.location.href );
         }
     </script>
+
+    <!-- sorting menu options -->
+    <script>
+        // Get the form element
+        const form = document.getElementById('form-container');
+        
+        // Get all button elements and convert to an array
+        const buttons = Array.from(form.getElementsByTagName('button'));
+        
+        // Sort the buttons by their inner text
+        buttons.sort((a, b) => a.textContent.localeCompare(b.textContent));
+        
+        // Remove existing buttons and append them in sorted order
+        buttons.forEach(button => form.appendChild(button));
+    </script>
+
 </body>
 </html>

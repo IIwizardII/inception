@@ -13,7 +13,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 env = environ.Env()
 
 
-NTC_TEMPLATES_PATH = os.path.join('D:/projects/inception/env/Lib/site-packages/ntc_templates/templates')
+NTC_TEMPLATES_PATH = os.path.join('D:/code/inception/env/Lib/site-packages/ntc_templates/templates')
 # Set the NET_TEXTFSM environment variable
 os.environ['NET_TEXTFSM'] = NTC_TEMPLATES_PATH
 

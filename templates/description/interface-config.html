@@ -1,0 +1,73 @@
+{% load static %}
+{% load custom_filters %}
+
+<title>{{ interface_name }}</title>
+
+<link rel="stylesheet" href="{% static 'styles/interface-config.css' %}">
+<script src="https://kit.fontawesome.com/919a77b378.js" crossorigin="anonymous"></script>
+
+<div class="main-container">
+
+    <div class="menu-container">
+        <div class="action-buttons">
+            <a href="{% url 'get-description' %}">
+                <button>
+                    <i class="fa-solid fa-left-long" title="Go back"></i>
+                </button>
+            </a>
+
+
+            <div class="modification-options">
+                <a href="{% url 'get-description' %}">
+                    <button>
+                        Change bandwidth
+                    </button>
+                </a>
+
+                <a href="{% url 'get-description' %}">
+                    <button>
+                        Create sub interface
+                    </button>
+                </a>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="output-container">
+        {% if data %}
+            {% if data_type|is_string %}
+                <div class="output-string-format">
+                    <pre>{{ data }}</pre>
+                </div>
+            {% else %}
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Header</th>
+                            <th>Value</th>
+                        </tr>
+                        
+                    </thead>
+
+                    <tbody>
+                        {% for row in data %}
+                        
+                            {% for key, value in row.items %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ value }}</td>
+                            </tr>
+                            {% endfor %}
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+        {% else %}
+            <p style="padding: 30px;">No data available</p>
+        {% endif %}
+    </div>
+</div>
